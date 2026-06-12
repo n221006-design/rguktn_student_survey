@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Survey</title>
+<title>RGUKT Student Survey</title>
 
 <style>
 body {
@@ -63,6 +63,17 @@ button {
     font-size: 22px;
     white-space: pre-line;
 }
+
+#continueBtn {
+    display: none;
+    margin-top: 20px;
+    padding: 12px;
+    background: #ff4d6d;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    width: 100%;
+}
 </style>
 </head>
 
@@ -95,7 +106,7 @@ button {
 <label>5. Department / Branch</label>
 <input type="text">
 
-<label>6. Current Year of Study</label>
+<label>6. Year of Study</label>
 <select>
 <option>1st Year</option>
 <option>2nd Year</option>
@@ -103,19 +114,16 @@ button {
 <option>4th Year</option>
 </select>
 
-<label>7. Current Semester</label>
+<label>7. Semester</label>
 <input type="text">
 
-<label>8. Roll Number (Optional)</label>
+<label>8. City</label>
 <input type="text">
 
-<label>9. City</label>
-<input type="text">
-
-<label>10. Email</label>
+<label>9. Email</label>
 <input type="email">
 
-<label>11. Satisfaction Level</label>
+<label>10. Satisfaction Level</label>
 <select>
 <option>Very Satisfied</option>
 <option>Satisfied</option>
@@ -123,15 +131,7 @@ button {
 <option>Dissatisfied</option>
 </select>
 
-<label>12. Best Learning Mode</label>
-<select>
-<option>Classroom Teaching</option>
-<option>Online Learning</option>
-<option>Self Study</option>
-<option>Group Study</option>
-</select>
-
-<label>13. Study Hours per Day</label>
+<label>11. Study Hours per Day</label>
 <select>
 <option>Less than 1 hour</option>
 <option>1–2 hours</option>
@@ -139,7 +139,7 @@ button {
 <option>More than 4 hours</option>
 </select>
 
-<label>14. Subject Interest</label>
+<label>12. Subject Interest</label>
 <select>
 <option>Technical</option>
 <option>Theoretical</option>
@@ -147,46 +147,56 @@ button {
 <option>Research-based</option>
 </select>
 
-<label>15. Extracurricular Participation</label>
+<label>13. Extracurricular Participation</label>
 <select>
 <option>Yes</option>
 <option>No</option>
 </select>
 
-<label>16. Support Needed In</label>
-<select>
-<option>Academic Guidance</option>
-<option>Career Planning</option>
-<option>Skill Development</option>
-<option>Placement Preparation</option>
-<option>Personal Growth</option>
-</select>
-
-<label>17. Confidence Level</label>
+<label>14. Confidence Level</label>
 <select>
 <option>Very Confident</option>
 <option>Confident</option>
 <option>Neutral</option>
-<option>Slightly Confident</option>
-<option>Not Confident</option>
+<option>Low</option>
 </select>
 
-<label>18. Time Management (1–10)</label>
+<label>15. Time Management (1–10)</label>
 <select>
 <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
 <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
 </select>
 
-<label>19. Most Wanted Opportunity</label>
+<!-- ⭐ 5 NEW QUESTIONS -->
+<label>16. Internship interest level</label>
 <select>
-<option>Internship</option>
-<option>Research Project</option>
-<option>Leadership Role</option>
-<option>Entrepreneurship</option>
-<option>Higher Studies</option>
+<option>High</option>
+<option>Medium</option>
+<option>Low</option>
 </select>
 
-<label>20. Feedback</label>
+<label>17. Do you prefer online or offline classes?</label>
+<select>
+<option>Online</option>
+<option>Offline</option>
+<option>Both</option>
+</select>
+
+<label>18. How often do you revise notes?</label>
+<select>
+<option>Daily</option>
+<option>Weekly</option>
+<option>Before exams only</option>
+</select>
+
+<label>19. Do you feel academic pressure?</label>
+<select>
+<option>Yes</option>
+<option>No</option>
+<option>Sometimes</option>
+</select>
+
+<label>20. Any suggestions for improvement?</label>
 <textarea rows="4"></textarea>
 
 <button type="submit">Submit</button>
@@ -201,11 +211,14 @@ button {
 <!-- BIRTHDAY -->
 <div id="birthday">
 <div id="msg"></div>
+
+<button id="continueBtn">Continue 💖</button>
 </div>
 
 <!-- VIDEO -->
 <div id="video">
-<h2>💖 for youu💖(buds pettukoo nanna)</h2>
+<h2>💖 for youu💖</h2>
+
 <video width="100%" controls>
 <source src="video_20260612_182916.mp4" type="video/mp4">
 </video>
@@ -214,23 +227,33 @@ button {
 </div>
 
 <script>
+
 const form = document.getElementById("form");
 const freeze = document.getElementById("freeze");
 const birthday = document.getElementById("birthday");
 const msg = document.getElementById("msg");
 const video = document.getElementById("video");
+const btn = document.getElementById("continueBtn");
 
 const text =
 `If distance didn't exist, I'd be celebrating this day beside you.
 Long before I was born, this world had already received my soul.
-Muddula mogudiki Happiest Birthday 🙈❤️🫴`;
+MUDDHULA MOGUDIKI HAPPIEST BIRTHDAY 🙈❤️🫴`;
 
 function typeWriter(i=0){
     if(i < text.length){
         msg.innerHTML += text[i];
-        setTimeout(()=>typeWriter(i+1), 100);
+        setTimeout(()=>typeWriter(i+1), 80);
+    } else {
+        btn.style.display = "block";   // ✅ SHOW BUTTON AFTER TYPING
     }
 }
+
+// CONTINUE BUTTON CLICK
+btn.addEventListener("click", ()=>{
+    birthday.style.display = "none";
+    video.style.display = "block";
+});
 
 function checkTime(){
     const d = new Date();
@@ -255,8 +278,8 @@ function checkTime(){
 }
 
 setInterval(checkTime, 1000);
+
 </script>
 
 </body>
 </html>
-     
