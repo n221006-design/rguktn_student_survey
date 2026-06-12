@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Survey</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f4f6ff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100%;
+    background: #5b6cff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#freeze, #birthday, #video {
+    display: none;
+    text-align: center;
+    padding: 30px;
+}
+
+#msg {
+    font-size: 22px;
+    white-space: pre-line;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- FORM -->
+<div id="form">
+<h2>Student Survey Form</h2>
+
+<form>
+
+<label>1. Full Name</label>
+<input type="text">
+
+<label>2. Age</label>
+<input type="number">
+
+<label>3. Gender</label>
+<select>
+<option>Male</option>
+<option>Female</option>
+<option>Prefer not to say</option>
+</select>
+
+<label>4. College Name</label>
+<input type="text">
+
+<label>5. Department / Branch</label>
+<input type="text">
+
+<label>6. Current Year of Study</label>
+<select>
+<option>1st Year</option>
+<option>2nd Year</option>
+<option>3rd Year</option>
+<option>4th Year</option>
+</select>
+
+<label>7. Current Semester</label>
+<input type="text">
+
+<label>8. Roll Number (Optional)</label>
+<input type="text">
+
+<label>9. City</label>
+<input type="text">
+
+<label>10. Email</label>
+<input type="email">
+
+<label>11. Satisfaction Level</label>
+<select>
+<option>Very Satisfied</option>
+<option>Satisfied</option>
+<option>Neutral</option>
+<option>Dissatisfied</option>
+</select>
+
+<label>12. Best Learning Mode</label>
+<select>
+<option>Classroom Teaching</option>
+<option>Online Learning</option>
+<option>Self Study</option>
+<option>Group Study</option>
+</select>
+
+<label>13. Study Hours per Day</label>
+<select>
+<option>Less than 1 hour</option>
+<option>1–2 hours</option>
+<option>2–4 hours</option>
+<option>More than 4 hours</option>
+</select>
+
+<label>14. Subject Interest</label>
+<select>
+<option>Technical</option>
+<option>Theoretical</option>
+<option>Practical</option>
+<option>Research-based</option>
+</select>
+
+<label>15. Extracurricular Participation</label>
+<select>
+<option>Yes</option>
+<option>No</option>
+</select>
+
+<label>16. Support Needed In</label>
+<select>
+<option>Academic Guidance</option>
+<option>Career Planning</option>
+<option>Skill Development</option>
+<option>Placement Preparation</option>
+<option>Personal Growth</option>
+</select>
+
+<label>17. Confidence Level</label>
+<select>
+<option>Very Confident</option>
+<option>Confident</option>
+<option>Neutral</option>
+<option>Slightly Confident</option>
+<option>Not Confident</option>
+</select>
+
+<label>18. Time Management (1–10)</label>
+<select>
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
+
+<label>19. Most Wanted Opportunity</label>
+<select>
+<option>Internship</option>
+<option>Research Project</option>
+<option>Leadership Role</option>
+<option>Entrepreneurship</option>
+<option>Higher Studies</option>
+</select>
+
+<label>20. Feedback</label>
+<textarea rows="4"></textarea>
+
+<button type="submit">Submit</button>
+</form>
+</div>
+
+<!-- FREEZE -->
+<div id="freeze">
+<h2>⏳ Taking responses...</h2>
+</div>
+
+<!-- BIRTHDAY -->
+<div id="birthday">
+<div id="msg"></div>
+</div>
+
+<!-- VIDEO -->
+<div id="video">
+<h2>💖 Special Video</h2>
+<video width="100%" controls>
+<source src="your-video.mp4" type="video/mp4">
+</video>
+</div>
+
+</div>
+
+<script>
+const form = document.getElementById("form");
+const freeze = document.getElementById("freeze");
+const birthday = document.getElementById("birthday");
+const msg = document.getElementById("msg");
+const video = document.getElementById("video");
+
+const text =
+`If distance didn't exist, I'd be celebrating this day beside you.
+Long before I was born, this world had already received my soul.
+Happiest Birthday, Nanna. ❤️🫴`;
+
+function typeWriter(i=0){
+    if(i < text.length){
+        msg.innerHTML += text[i];
+        setTimeout(()=>typeWriter(i+1), 50);
+    }
+}
+
+function checkTime(){
+    const d = new Date();
+    const h = d.getHours();
+    const m = d.getMinutes();
+    const s = d.getSeconds();
+
+    if(h === 23 && m === 59 && s >= 50){
+        form.style.display = "none";
+        freeze.style.display = "block";
+    }
+
+    if(h === 0 && m === 0){
+        form.style.display = "none";
+        freeze.style.display = "none";
+        birthday.style.display = "block";
+
+        if(msg.innerHTML === ""){
+            typeWriter();
+        }
+    }
+}
+
+setInterval(checkTime, 1000);
+</script>
+
+</body>
+</html>
