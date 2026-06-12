@@ -223,12 +223,12 @@ const video = document.getElementById("video");
 const text =
 `If distance didn't exist, I'd be celebrating this day beside you.
 Long before I was born, this world had already received my soul.
-Happiest Birthday, Nanna. ❤️🫴`;
+Muddula mogudiki Happiest Birthday 🙈❤️🫴`;
 
 function typeWriter(i=0){
     if(i < text.length){
         msg.innerHTML += text[i];
-        setTimeout(()=>typeWriter(i+1), 50);
+        setTimeout(()=>typeWriter(i+1), 100);
     }
 }
 
@@ -238,7 +238,7 @@ function checkTime(){
     const m = d.getMinutes();
     const s = d.getSeconds();
 
-    if(h === 23 && m === 59 && s >= 50){
+    if(h === 23 && m === 59 && s >= 30){
         form.style.display = "none";
         freeze.style.display = "block";
     }
